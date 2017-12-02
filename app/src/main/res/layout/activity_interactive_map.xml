@@ -6,7 +6,7 @@
     android:scrollbars="none"
     tools:context="com.czarek.europequiz.InteractiveMapActivity">
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -34,6 +34,6 @@
             android:src="@drawable/europe_mask"
             android:visibility="invisible"/>
 
-    </RelativeLayout>
+    </FrameLayout>
 
 </HorizontalScrollView>
