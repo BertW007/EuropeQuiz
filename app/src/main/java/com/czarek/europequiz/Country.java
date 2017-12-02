@@ -9,9 +9,9 @@ public class Country {
     private String mArea;
     private int mFlag;
     private int mHighlightMask;
-    private Color mMaskColor;
+    private int mMaskColor;
 
-    public Country(String countryName, String capital, String population, String area, int highlightMask, Color maskColor) {
+    public Country(String countryName, String capital, String population, String area, int highlightMask, int maskColor) {
         mCountryName = countryName;
         mCapital = capital;
         mPopulation = population;
@@ -20,12 +20,15 @@ public class Country {
         mMaskColor = maskColor;
     }
 
-    public Country(String countryName, String capital, int flag, String population, String area, Color maskColor) {
+    public Country(String countryName, String capital, int highlightMask, int maskColor){
         mCountryName = countryName;
         mCapital = capital;
-        mPopulation = population;
-        mArea = area;
+        mHighlightMask = highlightMask;
         mMaskColor = maskColor;
+    }
+
+    public Country(String countryName, int flag){
+        mCountryName = countryName;
         mFlag = flag;
     }
 
@@ -35,5 +38,5 @@ public class Country {
     public String getArea() {return mArea;}
     public int getFlag() {return mFlag;}
     public int getHighlightMask() {return mHighlightMask;}
-    public Color getMaskColor() {return mMaskColor;}
+    public int getMaskColor() {return mMaskColor;}
 }
