@@ -10,13 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <!--Europe map visible for user-->
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/europe_map"/>
-
         <!--Highlight mask of country, which is changing according to selected country-->
         <ImageView
             android:id="@+id/country_mask"
@@ -31,8 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/europe_mask"
-            android:visibility="invisible"/>
+            android:alpha="0"
+            android:src="@drawable/europe_mask" />
 
     </FrameLayout>
 
