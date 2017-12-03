@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SelectGameActivity" />
-        <activity android:name=".InteractiveMapActivity"></activity>
+        <activity android:name=".InteractiveMapActivity" />
     </application>
 
 </manifest>
