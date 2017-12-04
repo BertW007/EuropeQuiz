@@ -1,6 +1,10 @@
 package com.czarek.europequiz;
 
 import android.graphics.Color;
+import android.view.View;
+import android.widget.ImageView;
+
+import java.util.ArrayList;
 
 public class Country {
     private String mCountryName;
@@ -9,22 +13,22 @@ public class Country {
     private String mArea;
     private int mFlag;
     private int mHighlightMask;
-    private int mMaskColor;
+    private String mCountryID;
 
-    public Country(String countryName, String capital, String population, String area, int highlightMask, int maskColor) {
+    public Country(String countryName, String capital, String population, String area, int highlightMask, String countryID) {
         mCountryName = countryName;
         mCapital = capital;
         mPopulation = population;
         mArea = area;
         mHighlightMask = highlightMask;
-        mMaskColor = maskColor;
+        mCountryID = countryID;
     }
 
-    public Country(String countryName, String capital, int highlightMask, int maskColor){
+    public Country(String countryName, String capital, int highlightMask, String countryID){
         mCountryName = countryName;
         mCapital = capital;
         mHighlightMask = highlightMask;
-        mMaskColor = maskColor;
+        mCountryID = countryID;
     }
 
     public Country(String countryName, int flag){
@@ -38,5 +42,5 @@ public class Country {
     public String getArea() {return mArea;}
     public int getFlag() {return mFlag;}
     public int getHighlightMask() {return mHighlightMask;}
-    public int getMaskColor() {return mMaskColor;}
+    public String getCountryID() {return mCountryID;}
 }
