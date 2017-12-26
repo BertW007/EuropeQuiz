@@ -1,32 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:scrollbars="none"
     tools:context="com.czarek.europequiz.InteractiveMapActivity">
 
-    <FrameLayout
+    <HorizontalScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <!--Highlight mask of country, which is changing according to selected country-->
-        <ImageView
-            android:id="@+id/country_mask"
+        <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/europe_map"/>
+            android:layout_height="wrap_content">
 
-        <!--Coloured mask which is clickable and invisible for user-->
-        <ImageView
-            android:id="@+id/europe_mask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:alpha="0"
-            android:src="@drawable/europe_mask" />
 
-    </FrameLayout>
+            <ImageView
+                android:id="@+id/country_mask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:src="@drawable/europe_map"
+                android:contentDescription="@string/country_mask_description" />
 
-</HorizontalScrollView>
+            <ImageView
+                android:id="@+id/europe_mask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:alpha="0"
+                android:src="@drawable/europe_mask"
+                android:contentDescription="@string/coloured_mask_description" />
+
+        </FrameLayout>
+
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:id="@+id/country_info"
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="48dp"
+            android:layout_marginRight="48dp"
+            android:orientation="vertical"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/flag"
+                android:layout_width="120dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/info_flag_description" />
+
+            <TextView
+                android:id="@+id/country_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAllCaps="true"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_capital"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/country_capital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_population"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/country_population"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_area"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/country_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/info_km2" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/info_symbol"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:visibility="gone"
+        android:contentDescription="@string/info_button_description" />
+
+
+</RelativeLayout>

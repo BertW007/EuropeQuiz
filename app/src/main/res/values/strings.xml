@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">EuropeQuiz</string>
+    <string name="country_mask_description">Highlight mask of country, which is changing according to selected country</string>
+    <string name="coloured_mask_description">Coloured mask which is clickable and invisible for user</string>
+    <string name="info_flag_description">Flag of selected country</string>
+    <string name="info_capital">Capital:&#160;</string>
+    <string name="info_population">Population:&#160;</string>
+    <string name="info_area">Area:&#160;</string>
+    <string name="info_km2">&#160;km2</string>
+    <string name="info_button_description">Info button</string>
 </resources>
