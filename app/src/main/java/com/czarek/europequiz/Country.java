@@ -13,6 +13,7 @@ public class Country {
     private String mArea;
     private int mFlag;
     private int mHighlightMask;
+    private int mGrayMask;
     private String mCountryID;
 
     public Country(String countryName, String capital, String population, String area, int highlightMask, int flag, String countryID) {
@@ -21,14 +22,18 @@ public class Country {
         mPopulation = population;
         mArea = area;
         mHighlightMask = highlightMask;
-        mCountryID = countryID;
         mFlag = flag;
+        mCountryID = countryID;
     }
 
-    public Country(String countryName, String capital, int highlightMask, String countryID) {
+    public Country(String countryName, String capital, String population, String area, int highlightMask, int grayMask, int flag, String countryID) {
         mCountryName = countryName;
         mCapital = capital;
+        mPopulation = population;
+        mArea = area;
         mHighlightMask = highlightMask;
+        mGrayMask = grayMask;
+        mFlag = flag;
         mCountryID = countryID;
     }
 
@@ -59,6 +64,10 @@ public class Country {
 
     public int getHighlightMask() {
         return mHighlightMask;
+    }
+
+    public int getGrayMask() {
+        return mGrayMask;
     }
 
     public String getCountryID() {
