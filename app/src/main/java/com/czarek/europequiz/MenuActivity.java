@@ -20,7 +20,6 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent selectGameIntent = new Intent(MenuActivity.this, SelectGameActivity.class);
-
                 startActivity(selectGameIntent);
             }
         });
@@ -33,6 +32,17 @@ public class MenuActivity extends AppCompatActivity {
                 Intent viewMapIntent = new Intent(MenuActivity.this, InteractiveMapActivity.class);
 
                 startActivity(viewMapIntent);
+            }
+        });
+
+        Button about = findViewById(R.id.about_button);
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent aboutIntent = new Intent(MenuActivity.this, AboutActivity.class);
+
+                startActivity(aboutIntent);
             }
         });
 

@@ -5,23 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context="com.czarek.europequiz.MenuActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Europe Quiz" />
+        android:text="@string/europe_quiz_title"
+        android:layout_margin="16dp"
+        style="@style/title_style"/>
 
     <Button
         android:id="@+id/play_button"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="Play" />
+        android:text="@string/play_btn"
+        android:layout_margin="8dp" />
 
     <Button
         android:id="@+id/view_map_button"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="View Map" />
+        android:text="@string/view_map_btn"
+        android:layout_margin="8dp"/>
+
+    <Button
+        android:id="@+id/about_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/about_btn"
+        android:layout_margin="8dp"/>
 
 </LinearLayout>

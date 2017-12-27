@@ -8,4 +8,26 @@
     <string name="info_area">Area:&#160;</string>
     <string name="info_km2">&#160;km2</string>
     <string name="info_button_description">Info button</string>
+    <string name="about_title">About</string>
+    <string name="graphic_resources_subtitle">Graphic Resources</string>
+    <string name="map_of_europe_link"><u>Map of Europe</u></string>
+    <string name="from_plain_txt">&#160;from&#160;</string>
+    <string name="made_by_plain_txt">&#160;made by&#160;</string>
+    <string name="wikimedia_link"><u>wikimedia</u></string>
+    <string name="flags_link"><u>Flags</u></string>
+    <string name="freepik_link"><u>Freepik</u></string>
+    <string name="flaticon_link"><u>www.flaticon.com</u></string>
+    <string name="info_button_link"><u>Info Button</u></string>
+    <string name="europe_quiz_title">Europe Quiz</string>
+    <string name="play_btn">Play</string>
+    <string name="view_map_btn">View Map</string>
+    <string name="about_btn">About</string>
+    <string name="map_game_btn">Map Game</string>
+    <string name="flags_game_btn">Flags Game</string>
+    <string name="find_string">Find:&#160;</string>
+    <string name="confirm_btn">Confirm</string>
+    <string name="left_txt">Left:&#160;</string>
+    <string name="finish_msg_map_game">Congratulations! You have found all countries!</string>
+    <string name="go_to_menu_btn">Go To Menu</string>
+    <string name="next_btn">Next</string>
 </resources>

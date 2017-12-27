@@ -7,10 +7,49 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!-- Application theme without ActionBar -->
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">false</item>
     </style>
-
+    <!-- Theme for Activities titles -->
+    <style name="title_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <!-- Theme for subtitles -->
+    <style name="subtitle_style">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <!-- Theme for links -->
+    <style name="link_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+    <!-- Theme for plain text -->
+    <style name="plain_text_style">
+        <item name="android:textSize">14sp</item>
+    </style>
+    <!-- Theme for FindBar in MapGameActivity -->
+    <style name="find_bar_text">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- Theme for LeftBar in MapGameActivity -->
+    <style name="left_bar_text">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

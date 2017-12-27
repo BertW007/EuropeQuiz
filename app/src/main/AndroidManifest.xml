@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".SelectGameActivity" />
         <activity android:name=".InteractiveMapActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".MapGameActivity"></activity>
     </application>
 
 </manifest>

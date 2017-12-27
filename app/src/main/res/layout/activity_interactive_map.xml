@@ -20,8 +20,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/europe_map"
-                android:contentDescription="@string/country_mask_description" />
+                android:contentDescription="@string/country_mask_description"
+                android:src="@drawable/europe_map" />
 
             <ImageView
                 android:id="@+id/europe_mask"
@@ -29,8 +29,8 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:alpha="0"
-                android:src="@drawable/europe_mask"
-                android:contentDescription="@string/coloured_mask_description" />
+                android:contentDescription="@string/coloured_mask_description"
+                android:src="@drawable/europe_mask" />
 
         </FrameLayout>
 
@@ -81,7 +81,7 @@
                 <TextView
                     android:id="@+id/country_capital"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -116,7 +116,7 @@
                 <TextView
                     android:id="@+id/country_area"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -137,8 +137,8 @@
         android:layout_margin="16dp"
         android:background="@drawable/info_symbol"
         android:backgroundTint="@android:color/holo_red_light"
-        android:visibility="gone"
-        android:contentDescription="@string/info_button_description" />
+        android:contentDescription="@string/info_button_description"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
