@@ -19,41 +19,119 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * {@link MapGameActivity} - activity with map game.
+ *
+ * @author Czarek Pietrzak
+ */
 public class MapGameActivity extends AppCompatActivity {
-
+    /**
+     * List of European countries.
+     */
     ArrayList<Country> countries = createCountryList();
+
+    /**
+     * ID of the country selected by player.
+     */
     String touchedCountryID;
+
+    /**
+     * ID of the country to find.
+     */
     String IDofCountryToFind;
+
+    /**
+     * The country to find.
+     */
     Country countryToFind;
+
+    /**
+     * The current mask in form of a bitmap.
+     */
     Bitmap actualHighlight;
+
+    /**
+     * {@link TextView} which contains the number of countries remaining to guess.
+     */
+    TextView leftCountries;
+
+    /**
+     * A mask used to read a touch using the color assigned to a given country.
+     * It is invisible to the player.
+     */
+    ImageView mask;
+
+    /**
+     * The window that shows up after each answer.
+     * It contains information for the player whether his choice was correct or not.
+     */
+    RelativeLayout answerBox;
+
+    /**
+     * The window that appears after guessing all countries.
+     */
+    RelativeLayout finishBox;
+
+    /**
+     * {@link TextView} which contains the name of the country to guess.
+     */
+    TextView countryToFindView;
+
+    /**
+     * The button that the player confirms his choice.
+     */
+    Button confirmButton;
+
+    /**
+     * The button in the answerBox that the player goes to the next country.
+     */
+    Button nextButton;
+
+    /**
+     * The button in the finishBox that the player goes to the main menu.
+     */
+    Button goToMenuButton;
+
+    /**
+     * The country mask applied to the default mask.
+     * It is visible for the player.
+     */
+    ImageView highlight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Setting the content of the activity by using the XML layout
         setContentView(R.layout.activity_map_game);
 
-        final TextView leftCountries = findViewById(R.id.left_countries);
+        //Get the view containing the number of remaining countries to guess
+        leftCountries = findViewById(R.id.left_countries);
+
+        //Inserting the number of remaining countries to guess
         leftCountries.setText("" + countries.size());
 
-        final ImageView mask = findViewById(R.id.europe_mask);
+        //Get the mask view
+        mask = findViewById(R.id.europe_mask);
 
         mask.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent ev) {
-
-                switch(ev.getAction()){
+                switch (ev.getAction()) {
+                    //The player touched the screen
                     case MotionEvent.ACTION_UP:
+                        //Get the mask touch position
                         int evX = (int) ev.getX();
                         int evY = (int) ev.getY();
                         float[] evXY = new float[]{evX, evY};
 
+                        //Converting position of touch to single pixel
                         Matrix invertMatrix = new Matrix();
                         ((ImageView) v).getImageMatrix().invert(invertMatrix);
 
@@ -70,9 +148,16 @@ public class MapGameActivity extends AppCompatActivity {
                         if (y < 0) y = 0;
                         else if (y > bitmap.getHeight() - 1) y = bitmap.getHeight() - 1;
 
+                        //Saving the touched pixel in a variable
                         int touchedRGB = bitmap.getPixel(x, y);
+
+                        //Get color in the HEX code from the touched pixel
                         String RGB = Integer.toHexString(touchedRGB);
+
+                        //Get country ID which is included in HEX code
                         touchedCountryID = RGB.substring(6);
+
+                        //Calling the function that changes the mask
                         changeHighlight(touchedCountryID);
                         break;
                 }
@@ -82,13 +167,16 @@ public class MapGameActivity extends AppCompatActivity {
             }
         });
 
-        final RelativeLayout answerBox = findViewById(R.id.answer_box);
+        //Get the view of window that appears after each answer
+        answerBox = findViewById(R.id.answer_box);
 
         answerBox.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent ev) {
-                switch(ev.getAction()){
+                switch (ev.getAction()) {
+                    //The player releases the finger from the screen
                     case MotionEvent.ACTION_DOWN:
+                        //The window remains visible
                         answerBox.setVisibility(View.VISIBLE);
                         break;
                 }
@@ -98,13 +186,16 @@ public class MapGameActivity extends AppCompatActivity {
             }
         });
 
-        final RelativeLayout finishBox = findViewById(R.id.finish_box);
+        //Get the view of window that appears after finishing the game
+        finishBox = findViewById(R.id.finish_box);
 
         finishBox.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent ev) {
-                switch(ev.getAction()){
+                switch (ev.getAction()) {
+                    //The player releases the finger from the screen
                     case MotionEvent.ACTION_DOWN:
+                        //The window remains visible
                         finishBox.setVisibility(View.VISIBLE);
                         break;
                 }
@@ -114,120 +205,183 @@ public class MapGameActivity extends AppCompatActivity {
             }
         });
 
-        final TextView countryToFindView = findViewById(R.id.country_to_find);
+        //Get a view containing the name of the country that is currently guessed
+        countryToFindView = findViewById(R.id.country_to_find);
 
+        //Setting the country name to guess
         countryToFindView.setText(randomCountry());
 
-        final Button confirmButton = findViewById(R.id.confirm_button);
+        //Getting the button confirming the user's choice
+        confirmButton = findViewById(R.id.confirm_button);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Hide the button
                 confirmButton.setVisibility(View.GONE);
+
+                //Block the choice of country
                 mask.setEnabled(false);
 
+                //Searching for the selected country
                 String selectedCountryName = "";
                 for (Country country : countries) {
+                    //If a matching country was found
                     if (country.getCountryID().equals(touchedCountryID)) {
+                        //Set informations about this country in answerBox
                         setCountryInfo(country);
+                        //Save the name of the selected country
                         selectedCountryName = country.getCountryName();
                     }
                 }
-                TextView message = findViewById(R.id.message);
-                RelativeLayout answerBox = findViewById(R.id.answer_box);
 
-                if(isSelectedCountryCorrect(touchedCountryID, IDofCountryToFind)) {
+                //Get the views of answerBox and TextView where will be entered the appropriate message
+                answerBox = findViewById(R.id.answer_box);
+                TextView message = findViewById(R.id.message);
+
+                //Check if the selected country is the country you are looking for
+                //Assign the appropriate message in the text field
+                if (isSelectedCountryCorrect(touchedCountryID, IDofCountryToFind)) {
                     message.setText("Correct!");
                 } else {
                     message.setText("Wrong! You selected " + selectedCountryName);
                 }
 
+                //Make the answerBox visible
                 answerBox.setVisibility(View.VISIBLE);
             }
         });
 
-        Button nextButton = findViewById(R.id.next_button);
+        //Get the button that the player goes to the next country to guess
+        nextButton = findViewById(R.id.next_button);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Get the masks:
+                //default (Europe, blue) and temporary (country, orange)
                 ImageView europeMap = findViewById(R.id.europe_map);
                 ImageView countryMask = findViewById(R.id.country_mask);
+
+                //Hide the answerBox
                 answerBox.setVisibility(View.GONE);
+
+                //Unlock country selection
                 mask.setEnabled(true);
+
+                //Get the current mask visible for the user
                 BitmapDrawable drawable = (BitmapDrawable) europeMap.getDrawable();
+
+                //Save the current mask as a bitmap for processing
                 actualHighlight = drawable.getBitmap();
 
-                if(isSelectedCountryCorrect(touchedCountryID, IDofCountryToFind)){
-
+                //If the user's choice was correct
+                if (isSelectedCountryCorrect(touchedCountryID, IDofCountryToFind)) {
+                    //Get the gray mask of the selected country
                     Bitmap grayHighlight = null;
-                    for(Country country : countries) {
-                        if(country.getCountryID().equals(IDofCountryToFind)) {
+                    for (Country country : countries) {
+                        if (country.getCountryID().equals(IDofCountryToFind)) {
                             grayHighlight = BitmapFactory.decodeResource(view.getResources(), country.getGrayMask());
                         }
                     }
 
+                    //Combination of the gray mask of the guessed country with the current mask
                     actualHighlight = mergeToPin(actualHighlight, grayHighlight);
 
-                    if(countries.size() > 1) {
+                    if (countries.size() > 1) {
+                        //Delete a guessed country from the list of countries
                         countries.remove(countryToFind);
+
+                        //Change of the number of remaining countries to guess
                         leftCountries.setText("" + countries.size());
                     } else {
+                        //If the player has guessed all countries
+                        //The finishBox appears and the player can move to the main menu
                         showFinishBox();
                     }
                 }
 
+                //Hide the temporary mask of the country
                 countryMask.setVisibility(View.GONE);
+
+                //Change the mask visible to the player
                 europeMap.setImageBitmap(actualHighlight);
+
+                //Get a new country to guess
                 countryToFindView.setText(randomCountry());
             }
         });
 
-        Button goToMenuButton = findViewById(R.id.go_to_menu_button);
+        //Get the button that the player can go to the main menu when the game is over
+        goToMenuButton = findViewById(R.id.go_to_menu_button);
 
         goToMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Creating a new {@link Intent} object to move to the main menu
                 Intent selectGameIntent = new Intent(MapGameActivity.this, MenuActivity.class);
+
+                //Start a new activity
                 startActivity(selectGameIntent);
             }
         });
 
-    }
+    }//onCreate()
 
+    /**
+     * The function that returns a new bitmap created from two others, given as parameters.
+     *
+     * @param back      bitmap - background
+     * @param front     bitmap - foreground
+     * @return          new bitmap created from two others
+     */
     public static Bitmap mergeToPin(Bitmap back, Bitmap front) {
+        //Save bitmap (background) to a variable
         Bitmap result = Bitmap.createBitmap(back.getWidth(), back.getHeight(), back.getConfig());
+
+        //Creating a {@link Canvas} object with a bitmap-background
         Canvas canvas = new Canvas(result);
+
+        //Get the width of both bitmaps
         int widthBack = back.getWidth();
         int widthFront = front.getWidth();
+
+        //Draw both bitmaps on the canvas
         float move = (widthBack - widthFront) / 2;
         canvas.drawBitmap(back, 0f, 0f, null);
         canvas.drawBitmap(front, move, move, null);
+
         return result;
-    }
+    }//mergeToPin()
 
+    /**
+     * The function that causes the finishBox appearing on the screen.
+     */
     private void showFinishBox() {
-        RelativeLayout finishBox = findViewById(R.id.finish_box);
-        finishBox.setVisibility(View.VISIBLE);
-    }
+        //Get the finishBox view
+        finishBox = findViewById(R.id.finish_box);
 
+        //Make the finishBox visible
+        finishBox.setVisibility(View.VISIBLE);
+    }//showFinishBox()
+
+
+    /**
+     * The function that checks whether the country selected by the player is correct.
+     *
+     * @param touchedID ID of the country selected by the player
+     * @param IDToFind  ID of the country to guess
+     * @return          true/false
+     */
     private boolean isSelectedCountryCorrect(String touchedID, String IDToFind) {
         return touchedID.equals(IDToFind);
-    }
+    }//isSelectedCountryCorrect()
 
-    private String randomCountry() {
-        String countryName = "";
-        int max = countries.size();
-        int randomIndex = (int) (Math.random() * max);
-        countryToFind = countries.get(randomIndex);
-
-        IDofCountryToFind = countryToFind.getCountryID();
-        countryName = countryToFind.getCountryName();
-        setCountryInfo(countryToFind);
-
-        return countryName;
-    }
-
+    /**
+     * The function that returns a list of European countries.
+     *
+     * @return  list of countries
+     */
     public ArrayList<Country> createCountryList() {
         ArrayList<Country> countries = new ArrayList<>();
         countries.add(new Country("Albania", "Tirana", "3 098 594", "28 748", R.drawable.highlight_albania2, R.drawable.gray_highlight_albania, R.drawable.flag_albania, "01"));
@@ -273,30 +427,59 @@ public class MapGameActivity extends AppCompatActivity {
         countries.add(new Country("Italy", "Rome", "60 655 464", "301 230", R.drawable.highlight_italy2, R.drawable.gray_highlight_italy, R.drawable.flag_italy, "38"));
 
         return countries;
-    }
+    }//createCountryList()
 
+    /**
+     * The function that draws the country from the list of countries.
+     *
+     * @return  name of the country
+     */
+    private String randomCountry() {
+        String countryName = "";
+        int max = countries.size();
+        int randomIndex = (int) (Math.random() * max);
+        countryToFind = countries.get(randomIndex);
+
+        IDofCountryToFind = countryToFind.getCountryID();
+        countryName = countryToFind.getCountryName();
+        setCountryInfo(countryToFind);
+
+        return countryName;
+    }//randomCountry()
+
+    /**
+     * The function responsible for changing the mask depending on the selected country.
+     *
+     * @param countryID     ID of the selected country
+     */
     public void changeHighlight(String countryID) {
-        ImageView highlight = findViewById(R.id.country_mask);
+        highlight = findViewById(R.id.country_mask);
         Bitmap newHighlight = actualHighlight;
-        Button confirmButton = findViewById(R.id.confirm_button);
+        confirmButton = findViewById(R.id.confirm_button);
 
+        //Searching for country highlight mask by country ID
         for (Country country : countries) {
             if (country.getCountryID().equals(countryID)) {
+                //Set the selected country's highlight mask as a new highlight mask
                 newHighlight = BitmapFactory.decodeResource(getResources(), country.getHighlightMask());
                 confirmButton.setVisibility(View.VISIBLE);
                 break;
             }
         }
 
-        if(newHighlight == actualHighlight) {
+        if (newHighlight == actualHighlight) {
             confirmButton.setVisibility(View.GONE);
         }
 
-
         highlight.setImageBitmap(newHighlight);
         highlight.setVisibility(View.VISIBLE);
-    }
+    }//changeHighlight()
 
+    /**
+     * The function that sets information about the selected country in the answerBox.
+     *
+     * @param country   the country selected by the player
+     */
     private void setCountryInfo(Country country) {
         ImageView flagImage = findViewById(R.id.flag);
         TextView countryName = findViewById(R.id.country_name);
@@ -309,5 +492,5 @@ public class MapGameActivity extends AppCompatActivity {
         countryCapital.setText(country.getCapital());
         countryPopulation.setText(country.getPopulation());
         countryArea.setText(country.getArea());
-    }
-}
+    }//setCountryInfo()
+}//end of the MapGameActivity class

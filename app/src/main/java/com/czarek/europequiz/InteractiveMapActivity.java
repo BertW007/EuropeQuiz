@@ -16,33 +16,61 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * {@link InteractiveMapActivity} - activity with interactive map of Europe.
+ *
+ * @author Czarek Pietrzak
+ */
 public class InteractiveMapActivity extends AppCompatActivity {
 
+    /**
+     * List of European countries.
+     */
     ArrayList<Country> countries = createCountryList();
+
+    /**
+     * The mask used to read a touch using the color assigned to a given country.
+     * It is invisible for the user.
+     */
+    ImageView mask;
+
+    /**
+     * The info button which pressed will show up a window with informations about selected country.
+     */
+    ImageButton infoButton;
+
+    /**
+     * The window with informations about selected country.
+     */
+    RelativeLayout countryInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Setting the content of the activity by using the XML layout
         setContentView(R.layout.activity_interactive_map);
 
-        ImageView mask = findViewById(R.id.europe_mask);
-        final ImageButton infoButton = findViewById(R.id.info_button);
-        final RelativeLayout countryInfo = findViewById(R.id.country_info);
+        //Get the views for mask, info button and window with informations about selected country
+        mask = findViewById(R.id.europe_mask);
+        infoButton = findViewById(R.id.info_button);
+        countryInfo = findViewById(R.id.country_info);
 
         mask.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent ev) {
-
-                switch(ev.getAction()){
+                switch (ev.getAction()) {
+                    //The user touched the screen
                     case MotionEvent.ACTION_UP:
+                        //Get the position of touch on mask
                         int evX = (int) ev.getX();
                         int evY = (int) ev.getY();
                         float[] evXY = new float[]{evX, evY};
 
+                        //Converting position of touch to single pixel
                         Matrix invertMatrix = new Matrix();
                         ((ImageView) v).getImageMatrix().invert(invertMatrix);
 
@@ -59,9 +87,16 @@ public class InteractiveMapActivity extends AppCompatActivity {
                         if (y < 0) y = 0;
                         else if (y > bitmap.getHeight() - 1) y = bitmap.getHeight() - 1;
 
+                        //Saving the touched pixel in a variable
                         int touchedRGB = bitmap.getPixel(x, y);
+
+                        //Get color in the HEX code from the touched pixel
                         String RGB = Integer.toHexString(touchedRGB);
+
+                        //Get country ID which is included in HEX code
                         String countryID = RGB.substring(6);
+
+                        //Calling the function that changes the mask
                         changeHighlight(countryID);
                         break;
                 }
@@ -72,25 +107,31 @@ public class InteractiveMapActivity extends AppCompatActivity {
         });
 
         infoButton.setOnClickListener(new OnClickListener() {
+            //Po dotknięciu przycisku info
             @Override
             public void onClick(View v) {
+                //Depending on info window visibility
+                //Change visibility of the window and/or color of info button
                 if (countryInfo.getVisibility() == View.GONE) {
                     countryInfo.setVisibility(View.VISIBLE);
-                    infoButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
+                    infoButton.setImageResource(R.drawable.info_button_gray);
                 } else {
                     countryInfo.setVisibility(View.GONE);
-                    infoButton.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255, 68, 68)));
+                    infoButton.setImageResource(R.drawable.info_button_red);
                 }
             }
         });
 
+        //This listener has been set to prevent the info window from disappearing when moving the map.
+        //Thus, user can enable the info window for first selected country
+        //and then, moving the map and selecting other countries for check the information.
         countryInfo.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent ev) {
-                switch(ev.getAction()){
+                switch (ev.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         countryInfo.setVisibility(View.VISIBLE);
-                        infoButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
+                        infoButton.setImageResource(R.drawable.info_button_gray);
                         break;
                 }
 
@@ -99,8 +140,13 @@ public class InteractiveMapActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }//onCreate()
 
+    /**
+     * The function that returns a list of European countries.
+     *
+     * @return  list of countries
+     */
     public ArrayList<Country> createCountryList() {
         ArrayList<Country> countries = new ArrayList<>();
         countries.add(new Country("Albania", "Tirana", "3 098 594", "28 748", R.drawable.highlight_albania, R.drawable.flag_albania, "01"));
@@ -146,54 +192,96 @@ public class InteractiveMapActivity extends AppCompatActivity {
         countries.add(new Country("Italy", "Rome", "60 655 464", "301 230", R.drawable.highlight_italy, R.drawable.flag_italy, "38"));
 
         return countries;
-    }
+    }//createCountryList()
 
+    /**
+     * The function responsible for changing the mask, depending on the selected country.
+     *
+     * @param countryID     ID of the touched country
+     */
     public void changeHighlight(String countryID) {
+        //Getting current map mask
         ImageView highlight = findViewById(R.id.country_mask);
-        int newHighlight = R.drawable.europe_map;
-        RelativeLayout countryInfo = findViewById(R.id.country_info);
-        ImageButton infoButton = findViewById(R.id.info_button);
 
+        //Setting clear Europe map as new default mask
+        int newHighlight = R.drawable.europe_map;
+
+        //Getting views of info button and info window
+        infoButton = findViewById(R.id.info_button);
+        countryInfo = findViewById(R.id.country_info);
+
+        //A loop in which the country with the given ID is searched
         for (Country country : countries) {
+            //In the case of finding the right country
             if (country.getCountryID().equals(countryID)) {
+                //The new mask is replaced by the mask of the country
                 newHighlight = country.getHighlightMask();
+
+                //Setting the informations about the selected country
                 setCountryInfo(country);
                 break;
             }
         }
 
+        //In case of not finding a country by ID the new mask has not been replaced
         if (newHighlight == R.drawable.europe_map) {
+            //Hide the info window
             countryInfo.setVisibility(View.GONE);
-            infoButton.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255, 68, 68)));
+
+            //The info button is set to red again
+            infoButton.setImageResource(R.drawable.info_button_red);
         }
 
+        //Calling the function responsible for info button visibility
         showButton(newHighlight);
-        highlight.setImageResource(newHighlight);
-    }
 
+        //Changing the mask to a new one
+        highlight.setImageResource(newHighlight);
+    }//changeHighlight()
+
+    /**
+     * The function responsible for the visibility of the info button.
+     *
+     * @param newHighlight new mask, set depending on the selected country
+     */
     private void showButton(int newHighlight) {
+        //Getting the info button view
         ImageButton infoButton = findViewById(R.id.info_button);
+
+        //The default visibility setting
         int visibility = View.GONE;
 
+        //If a new mask is not the default one
         if (newHighlight != R.drawable.europe_map) {
+            //The visibility is changed
             visibility = View.VISIBLE;
         }
 
+        //Setting the visibility of the info button
         infoButton.setVisibility(visibility);
-    }
+    }//showButton()
 
+    /**
+     * The function that sets information about the selected country in the info window.
+     *
+     * @param country   country selected by the user
+     */
     private void setCountryInfo(Country country) {
+        //Getting views where information about country will be placed
         ImageView flagImage = findViewById(R.id.flag);
         TextView countryName = findViewById(R.id.country_name);
         TextView countryCapital = findViewById(R.id.country_capital);
         TextView countryPopulation = findViewById(R.id.country_population);
         TextView countryArea = findViewById(R.id.country_area);
 
+        //Changing the country flag image
         flagImage.setImageResource(country.getFlag());
+
+        //Changing other informations
         countryName.setText(country.getCountryName());
         countryCapital.setText(country.getCapital());
         countryPopulation.setText(country.getPopulation());
         countryArea.setText(country.getArea());
-    }
+    }//setCountryInfo()
 
-}
+}//end of the InteractiveMapActivity class
