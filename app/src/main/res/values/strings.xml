@@ -30,4 +30,7 @@
     <string name="finish_msg_map_game">Congratulations! You have found all countries!</string>
     <string name="go_to_menu_btn">Go To Menu</string>
     <string name="next_btn">Next</string>
+    <string name="logo_link"><u>Europe</u></string>
+    <string name="smashicons_link"><u>Smashicons</u></string>
+    <string name="select_game_title">Select Game</string>
 </resources>

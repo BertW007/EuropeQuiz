@@ -15,26 +15,45 @@
     </style>
     <!-- Theme for Activities titles -->
     <style name="title_style">
+        <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowColor">#125648</item>
+        <item name="android:shadowDx">2.0</item>
+        <item name="android:shadowDy">2.0</item>
+        <item name="android:shadowRadius">2.0</item>
     </style>
     <!-- Theme for subtitles -->
     <style name="subtitle_style">
+        <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowColor">#125648</item>
+        <item name="android:shadowDx">1.6</item>
+        <item name="android:shadowDy">1.6</item>
+        <item name="android:shadowRadius">1.6</item>
     </style>
     <!-- Theme for links -->
     <style name="link_style">
+        <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
     <!-- Theme for plain text -->
     <style name="plain_text_style">
+        <item name="android:fontFamily">sans-serif-condensed</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowColor">#125648</item>
+        <item name="android:shadowDx">1.4</item>
+        <item name="android:shadowDy">1.4</item>
+        <item name="android:shadowRadius">1.4</item>
     </style>
     <!-- Theme for FindBar in MapGameActivity -->
     <style name="find_bar_text">
@@ -43,6 +62,10 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">22sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@android:color/holo_green_dark</item>
+        <item name="android:shadowDx">2.2</item>
+        <item name="android:shadowDy">2.2</item>
+        <item name="android:shadowRadius">2.2</item>
     </style>
     <!-- Theme for LeftBar in MapGameActivity -->
     <style name="left_bar_text">
