@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
+    android:background="#1d826d"
     android:gravity="center"
     android:orientation="vertical"
+    android:padding="4dp"
     tools:context="com.czarek.europequiz.AboutActivity">
 
     <TextView
@@ -15,6 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/about_title" />
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +29,46 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:text="@string/graphic_resources_subtitle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/logo_link"
+                style="@style/link_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logo_link" />
+
+            <TextView
+                style="@style/plain_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/made_by_plain_txt" />
+
+            <TextView
+                android:id="@+id/smashicons_link"
+                style="@style/link_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/smashicons_link" />
+
+            <TextView
+                style="@style/plain_text_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from_plain_txt" />
+
+            <TextView
+                android:id="@+id/flaticon_link_3"
+                style="@style/link_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flaticon_link" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

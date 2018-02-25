@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#1d826d"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.czarek.europequiz.SelectGameActivity">
+
+    <TextView
+        style="@style/title_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/select_game_title" />
 
     <Button
         android:id="@+id/map_game_btn"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="@string/map_game_btn"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/map_game_btn" />
 
     <Button
         android:id="@+id/flags_game_btn"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:text="@string/flags_game_btn"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/flags_game_btn" />
 
 
 </LinearLayout>

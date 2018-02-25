@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#46B29D"
     tools:context="com.czarek.europequiz.InteractiveMapActivity">
 
     <HorizontalScrollView
@@ -19,14 +20,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/europe_map"/>
+                android:src="@drawable/europe_map" />
 
             <ImageView
                 android:id="@+id/country_mask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:contentDescription="@string/country_mask_description"
                 android:src="@drawable/europe_map" />
 
             <ImageView
@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:alpha="0"
-                android:contentDescription="@string/coloured_mask_description"
                 android:src="@drawable/europe_mask" />
 
         </FrameLayout>
@@ -91,7 +90,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/confirm_button"
         android:backgroundTint="@android:color/holo_green_dark"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/confirm_btn"
         android:textColor="@android:color/white"
         android:visibility="gone" />
@@ -118,6 +119,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:fontFamily="sans-serif-condensed"
                 android:textAlignment="center" />
 
             <ImageView
@@ -125,13 +127,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:contentDescription="@string/info_flag_description" />
+                android:contentDescription="@string/info_flag_description"
+                android:fontFamily="sans-serif-condensed" />
 
             <TextView
                 android:id="@+id/country_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="sans-serif-condensed"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
 
@@ -143,13 +147,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@string/info_capital"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/country_capital"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed" />
 
             </LinearLayout>
 
@@ -162,13 +168,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@string/info_population"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/country_population"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed" />
 
             </LinearLayout>
 
@@ -180,17 +188,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@string/info_area"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/country_area"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed"
                     android:text="@string/info_km2" />
 
             </LinearLayout>
@@ -200,7 +211,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:background="@android:color/holo_red_dark"
                 android:backgroundTint="@android:color/holo_red_dark"
+                android:fontFamily="sans-serif-condensed"
                 android:text="@string/next_btn"
                 android:textColor="@android:color/white"
                 tools:ignore="RtlHardcoded" />
@@ -225,6 +238,7 @@
             android:id="@+id/final_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
             android:gravity="center"
             android:text="@string/finish_msg_map_game"
             android:textSize="15sp"
@@ -237,10 +251,11 @@
             android:layout_below="@id/final_message"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
+            android:background="@android:color/holo_red_dark"
             android:backgroundTint="@android:color/holo_red_dark"
+            android:fontFamily="sans-serif-condensed"
             android:text="@string/go_to_menu_btn"
             android:textColor="@android:color/white" />
-
 
     </RelativeLayout>
 
