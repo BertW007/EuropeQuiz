@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/europe_quiz_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MenuActivity">
@@ -16,10 +16,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectGameActivity" />
-        <activity android:name=".InteractiveMapActivity" />
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".MapGameActivity"></activity>
+        <activity
+            android:name=".SelectGameActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".InteractiveMapActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".AboutActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MapGameActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".FlagGameActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="locked" />
     </application>
 
 </manifest>
